@@ -2,4 +2,4 @@
 
 require_once('Jsoner.php');
 
-$jsoner = new Jsoner();
+$jsoner = new Jsoner('sample');
