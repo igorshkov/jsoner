@@ -22,7 +22,31 @@ spl_autoload_register('autoload');
  ** Jsoner
  **/
 
-$jsoner = new Jsoner('sample.json');
+$jsoner = new Jsoner('regions');
+
+if($jsoner->isUnique('id')) {
+    L::i('id', 'is unique');
+} else {
+    L::e('id', 'is NOT unique');
+}
+
+////$region = $jsoner->get()[0];
+//$ids = $jsoner->getIds();
+////L::data($region);
+//$a = $jsoner->getById(21);
+//$b = $jsoner->getById(43);
+//
+//L::e(21);
+//L::data($a);
+//L::e(43);
+//L::data($b);
+//
+
+$jsoner = new Jsoner('newregions');
+
+$r221 = new r221($jsoner);
+
+
 
 /**
  ** App

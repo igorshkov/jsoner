@@ -2,30 +2,37 @@
 
 Class r221
 {
+
+    /*
+     * TODO
+     *      tests for uniqueness
+     *      tests for existence
+     *
+     */
+
+    private $jsoner;
+
     public function __construct($jsoner)
     {
-        $this->doTask($jsoner);
+        $this->$jsoner = $jsoner;
+        $this->doTask();
+        $this->checkUniquness();
     }
 
-    private function doTask($jsoner)
+    private function doTask()
     {
-        $regions = $jsoner->get();
-        $codes = $this->get();
+        $regions = $this->jsoner->get();
+        $codes = $this->codes();
 
-        sort($regions);
-        sort($codes);
-
+        // add id and code properties
         $matches = 0;
         $newRegions = [];
         foreach($codes as $entry) {
             foreach($regions as $region) {
                 if($entry['title']==$region->title) {
-//            L::i($entry['title'], 'title match! Codes: '.$entry['codes']);
                     $newEntry = $region;
-//            $newEntry->title = $entry['title'];
                     $newEntry->codes = $entry['codes'];
                     $newEntry->id = $entry['codes'][0];
-//            $newEntry->location = $region->location;
                     $newRegions[] = $newEntry;
                     $matches++;
                     break;
@@ -34,23 +41,45 @@ Class r221
         }
 
         sort($newRegions);
-        $jsoner->setArray($newRegions);
-        $jsoner->save('newregions.json');
+
+        // work with new regions
+        $this->jsoner->set($newRegions);
+
+        L::v('Creating new regions.. ', 'newregions.json');
+        $this->jsoner->save('newregions.json');
 
         L::i('CODES: ', sizeof($regions));
         L::i('REGIONS: ', sizeof($codes));
         L::i('MATCHES: ', $matches);
-        L::data($newRegions[44]->id);
-//        L::data($newRegions[44]->title);
-//        L::data($newRegions[44]->codes);
-//        L::data($newRegions[44]->location);
+    }
 
+    private function tests()
+    {
+        // Test 1
+        $a = $this->jsoner->getBy('id', 20);
+
+        // Test 2
+        $b = $this->jsoner->getById('title', 'Воронежская область');
+
+        // Test 3
+
+    }
+
+    private function hasElement($name, $val)
+    {
+
+    }
+
+    public function checkUniquness($name)
+    {
+        // all ids (just in case)
         $ids = [];
-        foreach($newRegions as $region) {
+        foreach($this->newRegions as $region) {
             $ids[] = $region->id;
         }
         sort($ids);
-        L::data($ids);
+
+
 
         //$str = '';
         //foreach ($titles as $title) {
@@ -61,8 +90,15 @@ Class r221
         //L::data($str);
 
 
+
+        if($this->jsoner->isUnique('id')) {
+            L::i('id', 'is unique');
+        } else {
+            L::e('id', 'is NOT unique');
+        }
     }
-    private function get()
+
+    private function codes()
     {
         return [
             ['codes' => [22], 'title' => 'Алтайский край'],
@@ -82,7 +118,7 @@ Class r221
             ['codes' => [7], 'title' => 'Кабардино-Балкарская Республика'],
             ['codes' => [39, 91], 'title' => 'Калининградская область'],
             ['codes' => [40], 'title' => 'Калужская область'],
-            ['codes' => [43], 'title' => 'Камчатский край'],
+            ['codes' => [41], 'title' => 'Камчатский край'],
             ['codes' => [9, 109], 'title' => 'Карачаево-Черкесская Республика'],
             ['codes' => [42, 142], 'title' => 'Кемеровская область'],
             ['codes' => [43], 'title' => 'Кировская область'],
@@ -143,7 +179,7 @@ Class r221
             ['codes' => [86], 'title' => 'Ханты-Мансийский автономный округ - Югра (Тюменская область)'],
             ['codes' => [74, 174], 'title' => 'Челябинская область'],
             ['codes' => [20, 95], 'title' => 'Чеченская республика'],
-            ['codes' => [21, 75, 80], 'title' => 'Читинская область'],
+            ['codes' => [75, 80], 'title' => 'Читинская область'],
             ['codes' => [21, 121], 'title' => 'Чувашская Республика - Чувашия'],
             ['codes' => [87], 'title' => 'Чукотский автономный округ'],
             ['codes' => [89], 'title' => 'Ямало-Ненецкий автономный округ (Тюменская область)'],
