@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e6f6dec-84d0-4171-b264-be2feabab536" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Jsoner.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/L.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jsoner.iws" />
