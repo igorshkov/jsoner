@@ -15,11 +15,9 @@ Class r221
     public function __construct($jsoner)
     {
         $this->$jsoner = $jsoner;
-        $this->doTask();
-        $this->checkUniquness();
     }
 
-    private function doTask()
+    public function doTask()
     {
         $regions = $this->jsoner->get();
         $codes = $this->codes();
@@ -53,7 +51,7 @@ Class r221
         L::i('MATCHES: ', $matches);
     }
 
-    private function tests()
+    public function tests()
     {
         // Test 1
         $a = $this->jsoner->getBy('id', 20);
@@ -65,16 +63,21 @@ Class r221
 
     }
 
-    private function hasElement($name, $val)
+    private function has($name, $val)
     {
-
+        foreach($this->jsoner->get() as $item) {
+            if($item->{$name} == $val) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function checkUniquness($name)
     {
         // all ids (just in case)
         $ids = [];
-        foreach($this->newRegions as $region) {
+        foreach($this->jsoner->get() as $region) {
             $ids[] = $region->id;
         }
         sort($ids);

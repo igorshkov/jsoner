@@ -82,6 +82,24 @@ class Jsoner
         return false;
     }
 
+    public function has($name, $val) {
+        foreach ($this->array as $item) {
+            if($item->{$name} === $val) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasProperty($name) {
+        foreach ($this->array as $item) {
+            if($item->{$name}) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function getBy($name, $val)
     {
         foreach ($this->array as $item) {
@@ -114,6 +132,7 @@ class Jsoner
     {
         L::v('set','filename');
         $this->filename = $this->filenameShortener($filename);
+        openJson();
     }
 
     public function init()
