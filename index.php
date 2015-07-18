@@ -22,7 +22,13 @@ spl_autoload_register('autoload');
  ** Jsoner
  **/
 
-$jsoner = new Jsoner('regions');
+$jsoner = new Jsoner('newregions.json');
+
+L::v('Test', 'start...');
+
+$test = new Test();
+
+L::v('Test', 'done!');
 
 if($jsoner->isUnique('id')) {
     L::i('id', 'is unique');
@@ -42,9 +48,9 @@ if($jsoner->isUnique('id')) {
 //L::data($b);
 //
 
-$jsoner = new Jsoner('newregions');
+//$jsoner = new Jsoner('newregions');
 
-$r221 = new r221($jsoner);
+//$r221 = new r221($jsoner);
 
 
 

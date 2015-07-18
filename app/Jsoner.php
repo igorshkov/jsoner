@@ -130,7 +130,7 @@ class Jsoner
 
     public function setFilename($filename)
     {
-        L::v('set','filename');
+        L::v('set',$filename);
         $this->filename = $this->filenameShortener($filename);
         openJson();
     }
